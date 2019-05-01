@@ -1,5 +1,5 @@
 //
-//  AdditionQuestion.h
+//  DivideQuestion.h
 //  Maths Game
 //
 //  Created by Frank Chen on 2019-05-01.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AdditionQuestion : Question
+@interface DivideQuestion : Question
 
 @end
 

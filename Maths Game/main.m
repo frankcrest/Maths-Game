@@ -7,19 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AdditionQuestion.h"
+#import "Question.h"
 #import "InputHandler.h"
 #import "ScoreKeeper.h"
+#import "QuestionManager.h"
+#import "QuestionFactory.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
         BOOL gameOn = YES;
         ScoreKeeper *mathScoreKeeper = [[ScoreKeeper alloc]init];
+        QuestionManager *myQuestionManager = [[QuestionManager alloc]init];
+        QuestionFactory *myQuestionFactory = [[QuestionFactory alloc]init];
+        
         while (gameOn) {
-            
-            
-            AdditionQuestion *randomQuestion = [[AdditionQuestion alloc]init];
+            Question *randomQuestion = [myQuestionFactory generateRandomQuestion];
+            [myQuestionManager.questions addObject:randomQuestion];
             NSLog(@"%@",[randomQuestion question]);
             
 //            char userInput[255];
@@ -29,6 +33,7 @@ int main(int argc, const char * argv[]) {
 //            NSString *userInputStringWithoutNewLine = [userInputString stringByTrimmingCharactersInSet:newLineChar];
             
             InputHandler *userInputHandler = [[InputHandler alloc]init];
+            
             NSString *userInputStringWithoutNewLine = [userInputHandler getUserInput];
             
             if ([userInputStringWithoutNewLine isEqualToString:@"quit"]){
@@ -47,6 +52,7 @@ int main(int argc, const char * argv[]) {
                 mathScoreKeeper.numOfWrongAnswers += 1;
                 NSLog(@"%@",[mathScoreKeeper scoreString]);
             }
+            NSLog(@"%@", myQuestionManager.timeOutput);
         }
     }
     return 0;
